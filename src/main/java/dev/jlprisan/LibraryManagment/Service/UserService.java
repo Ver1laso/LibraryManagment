@@ -19,4 +19,7 @@ public class UserService {
     public UserEntity save (UserEntity user){
         return userRepository.save(user);
     }
+    public UserEntity findById(Long id){
+        return userRepository.findById(id).orElse(null);
+    }
 }

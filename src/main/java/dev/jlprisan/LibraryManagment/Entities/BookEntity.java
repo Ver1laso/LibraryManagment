@@ -2,6 +2,8 @@ package Entities;
 
 import jakarta.persistence.*;
 
+@Entity
+@Table(name="books")
 public class BookEntity {
 
     @Id
@@ -10,6 +12,7 @@ public class BookEntity {
     private String title;
     private String author;
     private boolean borrowed;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity borrowedBy;

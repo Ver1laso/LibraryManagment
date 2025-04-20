@@ -47,4 +47,15 @@ public class BookService {
         // if book not found
         return null;
     }
+
+    public BookEntity returnBook(Long bookId){
+        BookEntity book =findBookById(bookId);
+        if(book != null && book.isBorrowed()){
+            book.setBorrowed(false);
+            book.setBorrowedBy(null);
+            return save(book);
+        }
+        //TODO handle error if book not found or book not borrowed
+        return null;
+    }
 }

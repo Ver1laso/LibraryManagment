@@ -1,14 +1,13 @@
-package Service;
+package dev.jlprisan.LibraryManagment.Service;
 
-import Entities.BookEntity;
-import Entities.UserEntity;
-import Repository.BookRepository;
-import Repository.UserRepository;
+import dev.jlprisan.LibraryManagment.Entities.BookEntity;
+import dev.jlprisan.LibraryManagment.Entities.UserEntity;
+import dev.jlprisan.LibraryManagment.Repository.BookRepository;
+import dev.jlprisan.LibraryManagment.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookService {

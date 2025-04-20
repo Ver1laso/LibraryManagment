@@ -1,9 +1,9 @@
-package Controller;
+package dev.jlprisan.LibraryManagment.Controller;
 
-import Entities.BookEntity;
-import Entities.UserEntity;
-import Service.BookService;
-import Service.UserService;
+import dev.jlprisan.LibraryManagment.Entities.BookEntity;
+import dev.jlprisan.LibraryManagment.Entities.UserEntity;
+import dev.jlprisan.LibraryManagment.Service.BookService;
+import dev.jlprisan.LibraryManagment.Service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

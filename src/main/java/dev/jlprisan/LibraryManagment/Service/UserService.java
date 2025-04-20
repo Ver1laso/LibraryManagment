@@ -1,7 +1,7 @@
-package Service;
+package dev.jlprisan.LibraryManagment.Service;
 
-import Entities.UserEntity;
-import Repository.UserRepository;
+import dev.jlprisan.LibraryManagment.Entities.UserEntity;
+import dev.jlprisan.LibraryManagment.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

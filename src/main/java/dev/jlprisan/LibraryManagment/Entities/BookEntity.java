@@ -1,4 +1,4 @@
-package Entities;
+package dev.jlprisan.LibraryManagment.Entities;
 
 import jakarta.persistence.*;
 

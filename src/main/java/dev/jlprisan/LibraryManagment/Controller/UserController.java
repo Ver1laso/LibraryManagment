@@ -2,6 +2,7 @@ package dev.jlprisan.LibraryManagment.Controller;
 
 import dev.jlprisan.LibraryManagment.Entities.UserEntity;
 import dev.jlprisan.LibraryManagment.Service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public UserEntity addUser(@RequestBody UserEntity user){
         return userService.save(user);
     }

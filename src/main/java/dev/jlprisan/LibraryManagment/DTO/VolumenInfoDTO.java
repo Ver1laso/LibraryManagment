@@ -21,6 +21,7 @@ public class VolumenInfoDTO {
     private String previewLink;
     private String infoLink;
     private String canonicalVolumeLink;
+    private ImageLinksDTO imageLinks;
 
     public String getTitle() {
         return title;
@@ -156,5 +157,13 @@ public class VolumenInfoDTO {
 
     public void setCanonicalVolumeLink(String canonicalVolumeLink) {
         this.canonicalVolumeLink = canonicalVolumeLink;
+    }
+
+    public ImageLinksDTO getImageLinks() {
+        return imageLinks;
+    }
+
+    public void setImageLinks(ImageLinksDTO imageLinks) {
+        this.imageLinks = imageLinks;
     }
 }

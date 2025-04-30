@@ -13,19 +13,35 @@ public class GoogleBookService {
     private final RestTemplate restTemplate;
     private final Credentials credentials;
 
-    @Autowired
+
     public GoogleBookService(RestTemplate restTemplate, Credentials credentials){
         this.restTemplate = restTemplate;
         this.credentials = credentials;
     }
 
 
-
-
     public String searchGoogleBooks(String query){
         String url = "https://www.googleapis.com/books/v1/volumes?q="
                 + query + "&key=" + credentials.getApiKey();
 
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    public String searchGoogleBooksTitle(String title){
+        String url = "https://www.googleapis.com/books/v1/volumes?q=inititle:"
+                + title + "&key=" + credentials.getApiKey();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    public String searchGoogleBooksAuthor(String author){
+        String url = "https://www.googleapis.com/books/v1/volumes?q=inauthor:"
+                + author + "&key=" + credentials.getApiKey();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    public String searchGoogleBooksISBN(String isbn){
+        String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:"
+                + isbn + "&key=" + credentials.getApiKey();
         return restTemplate.getForObject(url, String.class);
     }
 }

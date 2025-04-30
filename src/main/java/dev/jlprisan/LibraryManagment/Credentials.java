@@ -18,12 +18,12 @@ public class Credentials {
     @Value("${google.books.api.key}")
     private String googleBooksApiKey;
 
-    @PostConstruct
-    public void showCredentials(){
-        System.out.println("Usuario: " + username);
-        System.out.println("Password: " + password);
-        System.out.println("Api Key: " + googleBooksApiKey);
-    }
+//    @PostConstruct
+//    public void showCredentials(){
+//        System.out.println("Usuario: " + username);
+//        System.out.println("Password: " + password);
+//        System.out.println("Api Key: " + googleBooksApiKey);
+//    }
 
 
     public String getApiKey() {

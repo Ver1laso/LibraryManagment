@@ -13,6 +13,7 @@ public class GoogleBookResponseDTO {
     private String accessViewStatus;
     private Boolean quoteSharingAllowed;
     private SearchInfoDTO searchInfo;
+    private VolumenInfoDTO volumenInfoDTO;
 
     public String getKind() {
         return kind;
@@ -92,5 +93,13 @@ public class GoogleBookResponseDTO {
 
     public void setSearchInfo(SearchInfoDTO searchInfo) {
         this.searchInfo = searchInfo;
+    }
+
+    public VolumenInfoDTO getVolumenInfoDTO() {
+        return volumenInfoDTO;
+    }
+
+    public void setVolumenInfoDTO(VolumenInfoDTO volumenInfoDTO) {
+        this.volumenInfoDTO = volumenInfoDTO;
     }
 }

@@ -1,53 +1,94 @@
 package dev.jlprisan.LibraryManagment.Mapper;
 
-import dev.jlprisan.LibraryManagment.DTO.GoogleBookResponseDTO;
-import dev.jlprisan.LibraryManagment.DTO.ImageLinksDTO;
-import dev.jlprisan.LibraryManagment.DTO.IndustryIdentifiersDTO;
-import dev.jlprisan.LibraryManagment.DTO.VolumenInfoDTO;
+import dev.jlprisan.LibraryManagment.DTO.*;
 import dev.jlprisan.LibraryManagment.Entities.BookEntity;
-import dev.jlprisan.LibraryManagment.Entities.ImageLinksEntity;
-import dev.jlprisan.LibraryManagment.Entities.IsbnEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
 
 @Component
 public class BookMapper {
 
-    public BookEntity toBookEntity(GoogleBookResponseDTO googleBookResponseDTO){
-        BookEntity bookEntity = new BookEntity();
+    public List<BookEntity> toBookEntity(GoogleBookResponseDTO googleBookResponseDTO){
 
-        bookEntity.setTitle(googleBookResponseDTO.getVolumenInfoDTO().getTitle());
-        bookEntity.setAuthor(googleBookResponseDTO.getVolumenInfoDTO().getAuthors());
-        bookEntity.setPublishDate(googleBookResponseDTO.getVolumenInfoDTO().getPublishedDate());
-//        bookEntity.setIsbnList(mapIsbnLiksDTOToEntity(googleBookResponseDTO.getVolumenInfoDTO().getIndustryIdentifiers(),bookEntity));
-        bookEntity.setImageLinksEntity(mapImageLinksDTOToEntity(googleBookResponseDTO.getVolumenInfoDTO().getImageLinks()));
+        return googleBookResponseDTO.getItems().stream()
+                .map(item ->{
+                    BookEntity bookEntity = new BookEntity();
+                    VolumeInfoDTO volumeInfo = item.getVolumeInfo();
+                    SaleInfoDTO saleInfo = item.getSaleInfo();
+                    AccessInfoDTO accessInfo = item.getAccessInfo();
 
-        return bookEntity;
+                    // Basic mapping
+                    bookEntity.setTitle(volumeInfo.getTitle());
+                    bookEntity.setAuthor(volumeInfo.getAuthors());
+                    bookEntity.setPublishDate(volumeInfo.getPublishedDate());
+                    bookEntity.setLanguage(volumeInfo.getLanguage());
+
+                    // Null Checks
+
+                    if(accessInfo != null){
+                        bookEntity.setCountry(accessInfo.getCountry());
+                    }
+                    if(saleInfo != null){
+                        bookEntity.setEbook(saleInfo.getEbook());
+                    }
+
+                    // ISBN's
+                    volumeInfo.getIndustryIdentifiers().stream()
+                            .filter(Objects::nonNull)
+                            .forEach(identifier -> {
+                                if("ISBN_10".equals(identifier.getType())){
+                                    bookEntity.setIsbn10(identifier.getIdentifier());
+                                } else if("ISBN_13".equals(identifier.getType())){
+                                    bookEntity.setIsbn13(identifier.getIdentifier());
+                                }
+                            });
+
+                    // Thumb Images
+                    if(volumeInfo.getImageLinks() != null){
+                        bookEntity.setThumbNail(volumeInfo.getImageLinks().getThumbnail());
+                        bookEntity.setSmallThumbNail(volumeInfo.getImageLinks().getSmallThumbnail());
+                    }
+
+                    return bookEntity;
+                })
+                .collect(Collectors.toList());
+//        BookEntity bookEntity = new BookEntity();
+//        bookEntity.setTitle(googleBookResponseDTO.getItems().getVolumeInfo().getTitle());
+//        bookEntity.setAuthor(googleBookResponseDTO.getItems().getVolumeInfo().getAuthors());
+//        bookEntity.setPublishDate(googleBookResponseDTO.getItems().getVolumeInfo().getPublishedDate());
+//        bookEntity.setLanguage(googleBookResponseDTO.getItems().getVolumeInfo().getLanguage());
+//        bookEntity.setCountry(googleBookResponseDTO.getItems().getAccessInfo().getCountry());
+//        bookEntity.setEbook(googleBookResponseDTO.getItems().getSaleInfo().getEbook());
+//
+//        // Processing ISBNs
+//        if(googleBookResponseDTO.getItems().getVolumeInfo().getIndustryIdentifiers() != null){
+//            for(IndustryIdentifiersDTO identifier : googleBookResponseDTO.getItems().getVolumeInfo().getIndustryIdentifiers()){
+//                if("ISBN_10".equals((identifier.getType()))) {
+//                    bookEntity.setIsbn10(identifier.getIdentifier());
+//                } else if ("ISBN_13".equals(identifier.getType())){
+//                    bookEntity.setIsbn13(identifier.getIdentifier());
+//                }
+//            }
+//        }
+//
+//        // Thumb images
+//        if(googleBookResponseDTO.getItems().getVolumeInfo().getImageLinks() != null){
+//            bookEntity.setThumbNail(googleBookResponseDTO.getItems().getVolumeInfo().getImageLinks().getThumbnail());
+//            bookEntity.setSmallThumbNail(googleBookResponseDTO.getItems().getVolumeInfo().getImageLinks().getSmallThumbnail());
+//        }
+//
+//        return bookEntity;
+
     }
 
-
-//    public static List<IsbnEntity> mapIsbnLiksDTOToEntity(List<IndustryIdentifiersDTO> dtoList, BookEntity book){
-//        if(dtoList == null) return Collections.emptyList();
-//
-//        return dtoList.stream().map(dto ->{
-//            IsbnEntity isbn = new IsbnEntity();
-//            isbn.setType(dto.getType());
-//            isbn.setIdentifier(dto.getIdentifier());
-//            isbn.setBook(book);
-//            return isbn
-//        }).collect(Collectors.toList());
+//    public String mapAndToString(GoogleBookResponseDTO dto) {
+//        BookEntity entity = this.toBookEntity(dto);
+//        return entity.toString(); // Usa el toString() de BookEntity
 //    }
 
-    public static ImageLinksEntity mapImageLinksDTOToEntity(ImageLinksDTO dto){
-        if(dto == null) return null;
-
-        ImageLinksEntity entity = new ImageLinksEntity();
-        entity.setThumbnail(dto.getThumbnail());
-        entity.setSmallThumbnail(dto.getSmallThumbnail());
-        return entity;
-    }
 }

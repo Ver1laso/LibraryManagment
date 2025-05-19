@@ -2,7 +2,7 @@ package dev.jlprisan.LibraryManagment.DTO;
 
 import java.util.List;
 
-public class VolumenInfoDTO {
+public class VolumeInfoDTO {
 
     private String title;
     private List<String> authors;

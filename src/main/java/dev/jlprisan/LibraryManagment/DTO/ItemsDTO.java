@@ -8,7 +8,10 @@ public class ItemsDTO {
     private String id;
     private String etag;
     private String selfLink;
-    private VolumenInfoDTO volumeInfo;
+    private VolumeInfoDTO volumeInfo;
+    private SaleInfoDTO saleInfo;
+    private AccessInfoDTO accessInfo;
+    private SearchInfoDTO searchInfo;
 
     public String getKind() {
         return kind;
@@ -42,11 +45,35 @@ public class ItemsDTO {
         this.selfLink = selfLink;
     }
 
-    public VolumenInfoDTO getVolumeInfo() {
+    public VolumeInfoDTO getVolumeInfo() {
         return volumeInfo;
     }
 
-    public void setVolumeInfo(VolumenInfoDTO volumeInfo) {
+    public void setVolumeInfo(VolumeInfoDTO volumeInfo) {
         this.volumeInfo = volumeInfo;
+    }
+
+    public SaleInfoDTO getSaleInfo() {
+        return saleInfo;
+    }
+
+    public void setSaleInfo(SaleInfoDTO saleInfo) {
+        this.saleInfo = saleInfo;
+    }
+
+    public AccessInfoDTO getAccessInfo() {
+        return accessInfo;
+    }
+
+    public void setAccessInfo(AccessInfoDTO accessInfo) {
+        this.accessInfo = accessInfo;
+    }
+
+    public SearchInfoDTO getSearchInfo() {
+        return searchInfo;
+    }
+
+    public void setSearchInfo(SearchInfoDTO searchInfo) {
+        this.searchInfo = searchInfo;
     }
 }

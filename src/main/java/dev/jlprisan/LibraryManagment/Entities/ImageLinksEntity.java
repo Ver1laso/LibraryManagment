@@ -1,5 +1,8 @@
 package dev.jlprisan.LibraryManagment.Entities;
 
+import jakarta.persistence.Entity;
+
+
 public class ImageLinksEntity {
 
     private String smallThumbnail;

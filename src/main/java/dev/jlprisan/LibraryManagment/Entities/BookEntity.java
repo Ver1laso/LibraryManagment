@@ -1,5 +1,6 @@
 package dev.jlprisan.LibraryManagment.Entities;
 
+import dev.jlprisan.LibraryManagment.DTO.ImageLinksDTO;
 import dev.jlprisan.LibraryManagment.DTO.IndustryIdentifiersDTO;
 import jakarta.persistence.*;
 
@@ -16,29 +17,21 @@ public class BookEntity {
     private String title;
     private List<String> author;
     private String publishDate;
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IsbnEntity> isbnList = new ArrayList<>();
-    @Embedded
-    private ImageLinksEntity imageLinks;
+//    @Column(name = "isbn_10", length = 13)
+    private String isbn10;
+//    @Column(name = "isbn_13", length = 17)
+    private String isbn13;
+    @Column(name = "thumbnail_url", length = 512)
+    private String thumbNail;
+    @Column(name = "small_thumbnail_url", length = 512)
+    private String smallThumbNail;
     private String language;
     private String country;
     private Boolean isEbook;
     private boolean borrowed;
+    private String borrowedTo;
+    private String notes;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity borrowedBy;
-
-    public void addIsbnFromDTO(List<IndustryIdentifiersDTO> dtos){
-        this.isbnList = dtos.stream()
-                .map(dto ->{
-                    IsbnEntity isbn = new IsbnEntity();
-                    isbn.setType(dto.getType());
-                    isbn.setIdentifier(dto.getIdentifier());
-                    isbn.setBook(this);
-                    return isbn;
-                }).toList();
-    }
 
 
     public Long getId() {
@@ -73,20 +66,36 @@ public class BookEntity {
         this.publishDate = publishDate;
     }
 
-    public List<IsbnEntity> getIsbnList() {
-        return isbnList;
+    public String getIsbn10() {
+        return isbn10;
     }
 
-    public void setIsbnList(List<IsbnEntity> isbnList) {
-        this.isbnList = isbnList;
+    public void setIsbn10(String isbn10) {
+        this.isbn10 = isbn10;
     }
 
-    public ImageLinksEntity getImageLinksEntity() {
-        return imageLinks;
+    public String getIsbn13() {
+        return isbn13;
     }
 
-    public void setImageLinksEntity(ImageLinksEntity imageLinksEntity) {
-        this.imageLinks = imageLinksEntity;
+    public void setIsbn13(String isbn13) {
+        this.isbn13 = isbn13;
+    }
+
+    public String getThumbNail() {
+        return thumbNail;
+    }
+
+    public void setThumbNail(String thumbNail) {
+        this.thumbNail = thumbNail;
+    }
+
+    public String getSmallThumbNail() {
+        return smallThumbNail;
+    }
+
+    public void setSmallThumbNail(String smallThumbNail) {
+        this.smallThumbNail = smallThumbNail;
     }
 
     public String getLanguage() {
@@ -121,13 +130,39 @@ public class BookEntity {
         this.borrowed = borrowed;
     }
 
-    public UserEntity getBorrowedBy() {
-        return borrowedBy;
+    public String getBorrowedTo() {
+        return borrowedTo;
     }
 
-    public void setBorrowedBy(UserEntity borrowedBy) {
-        this.borrowedBy = borrowedBy;
+    public void setBorrowedTo(String borrowedTo) {
+        this.borrowedTo = borrowedTo;
     }
 
+    public String getNotes() {
+        return notes;
+    }
 
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    @Override
+    public String toString() {
+        return "BookEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author=" + author +
+                ", publishDate='" + publishDate + '\'' +
+                ", isbn10='" + isbn10 + '\'' +
+                ", isbn13='" + isbn13 + '\'' +
+                ", thumbNail='" + thumbNail + '\'' +
+                ", smallThumbNail='" + smallThumbNail + '\'' +
+                ", language='" + language + '\'' +
+                ", country='" + country + '\'' +
+                ", isEbook=" + isEbook +
+                ", borrowed=" + borrowed +
+                ", borrowedTo='" + borrowedTo + '\'' +
+                ", notes='" + notes + '\'' +
+                '}';
+    }
 }

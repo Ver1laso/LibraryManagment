@@ -5,19 +5,22 @@ import java.util.List;
 public class AccessInfoDTO {
 
 
-    private List<String> country;
+    private String country;
     private String viewability;
     private Boolean embeddable;
     private Boolean publicDomain;
     private String textToSpeechPermission;
     private EpubDTO epub;
     private PdfDTO pdf;
+    private String webReaderLink;
+    private String accessViewStatus;
+    private Boolean quoteSharingAllowed;
 
-    public List<String> getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setCountry(List<String> country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
@@ -67,5 +70,29 @@ public class AccessInfoDTO {
 
     public void setPdf(PdfDTO pdf) {
         this.pdf = pdf;
+    }
+
+    public String getWebReaderLink() {
+        return webReaderLink;
+    }
+
+    public void setWebReaderLink(String webReaderLink) {
+        this.webReaderLink = webReaderLink;
+    }
+
+    public String getAccessViewStatus() {
+        return accessViewStatus;
+    }
+
+    public void setAccessViewStatus(String accessViewStatus) {
+        this.accessViewStatus = accessViewStatus;
+    }
+
+    public Boolean getQuoteSharingAllowed() {
+        return quoteSharingAllowed;
+    }
+
+    public void setQuoteSharingAllowed(Boolean quoteSharingAllowed) {
+        this.quoteSharingAllowed = quoteSharingAllowed;
     }
 }

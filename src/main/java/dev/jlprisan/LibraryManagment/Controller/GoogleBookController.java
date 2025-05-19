@@ -1,5 +1,7 @@
 package dev.jlprisan.LibraryManagment.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import dev.jlprisan.LibraryManagment.DTO.GoogleBookResponseDTO;
 import dev.jlprisan.LibraryManagment.Service.GoogleBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,19 +26,21 @@ public class GoogleBookController {
 
     @GetMapping("search/title")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<String> searchGoogleBookTitle(@RequestParam String title){
+    public ResponseEntity<GoogleBookResponseDTO> searchGoogleBookTitle(@RequestParam String title){
         return ResponseEntity.ok(googleBookService.searchGoogleBooksTitle(title));
     }
 
     @GetMapping("search/author")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<String> searchGoogleBookAuthor(@RequestParam String author){
+    public ResponseEntity<GoogleBookResponseDTO> searchGoogleBookAuthor(@RequestParam String author){
         return ResponseEntity.ok(googleBookService.searchGoogleBooksAuthor(author));
     }
 
+
+
     @GetMapping("search/isbn")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<String> searchGoogleBooksISBN(@RequestParam String isbn){
+    public ResponseEntity<GoogleBookResponseDTO> searchGoogleBooksISBN(@RequestParam String isbn) throws JsonProcessingException {
         return ResponseEntity.ok(googleBookService.searchGoogleBooksISBN(isbn));
     }
 }

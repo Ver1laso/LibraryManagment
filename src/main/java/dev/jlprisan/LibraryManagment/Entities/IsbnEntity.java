@@ -2,6 +2,7 @@ package dev.jlprisan.LibraryManagment.Entities;
 
 import jakarta.persistence.*;
 
+
 public class IsbnEntity {
 
     @Id

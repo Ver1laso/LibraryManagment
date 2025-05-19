@@ -11,11 +11,14 @@ import java.util.List;
 
 @Service
 public class BookService {
-    @Autowired
-    private BookRepository bookRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final BookRepository bookRepository;
+    private final UserRepository userRepository;
+
+    public BookService (BookRepository bookRepository, UserRepository userRepository){
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
+    }
 
     public List<BookEntity> findAllBooks() {
         return bookRepository.findAll();
@@ -33,25 +36,25 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    public BookEntity borrowBook(Long bookId, Long userId){
-        BookEntity book = findBookById(bookId);
-        UserEntity user = userRepository.findById(userId).orElse(null);
-
-        if(book != null && !book.isBorrowed() && user != null){
-            book.setBorrowedBy(user);
-            book.setBorrowed(true);
-            return save(book);
-        }
-
-        // if book not found
-        return null;
-    }
+//    public BookEntity borrowBook(Long bookId, Long userId){
+//        BookEntity book = findBookById(bookId);
+//        UserEntity user = userRepository.findById(userId).orElse(null);
+//
+//        if(book != null && !book.isBorrowed() && user != null){
+//            book.setBorrowedTo(user);
+//            book.setBorrowed(true);
+//            return save(book);
+//        }
+//
+//        // if book not found
+//        return null;
+//    }
 
     public BookEntity returnBook(Long bookId){
         BookEntity book =findBookById(bookId);
         if(book != null && book.isBorrowed()){
             book.setBorrowed(false);
-            book.setBorrowedBy(null);
+            book.setBorrowedTo(null);
             return save(book);
         }
         //TODO handle error if book not found or book not borrowed

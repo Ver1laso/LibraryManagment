@@ -56,27 +56,21 @@ public class BookController {
         bookService.deleteByID(id);
     }
 
-    @PostMapping("/{bookId}/borrow/{userId}")
-    public ResponseEntity<BookEntity> borrowBook(@PathVariable Long bookId, @PathVariable Long userId){
-//        BookEntity borrowedBook = bookService.borrowBook(bookId, userId);
-//        if(borrowedBook != null){
-//            return ResponseEntity.ok(borrowedBook);
-//        } else {
-//            return ResponseEntity.badRequest().build();
+//    @PostMapping("/{bookId}/borrow/{userId}")
+//    public ResponseEntity<BookEntity> borrowBook(@PathVariable Long bookId, @PathVariable Long userId){
+//        Optional<BookEntity> book = Optional.ofNullable(bookService.findBookById(bookId));
+//        Optional<UserEntity> user = Optional.ofNullable(userService.findById(userId));
+//
+//        if(!book.isPresent()){
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 //        }
-        Optional<BookEntity> book = Optional.ofNullable(bookService.findBookById(bookId));
-        Optional<UserEntity> user = Optional.ofNullable(userService.findById(userId));
-
-        if(!book.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        if(!user.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        BookEntity borrowedBook = bookService.borrowBook(bookId,userId);
-        return ResponseEntity.ok(borrowedBook);
-    }
+//        if(!user.isPresent()){
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//
+//        BookEntity borrowedBook = bookService.borrowBook(bookId,userId);
+//        return ResponseEntity.ok(borrowedBook);
+//    }
 
     @PostMapping("/{bookId}/return")
     public ResponseEntity<BookEntity> returnBook(@PathVariable Long bookId){

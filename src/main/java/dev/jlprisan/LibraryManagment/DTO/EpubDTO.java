@@ -10,4 +10,5 @@ public class EpubDTO {
     public void setAvailable(Boolean available) {
         isAvailable = available;
     }
+
 }

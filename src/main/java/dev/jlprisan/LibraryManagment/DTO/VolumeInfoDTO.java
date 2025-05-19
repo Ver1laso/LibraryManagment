@@ -17,11 +17,11 @@ public class VolumenInfoDTO {
     private String maturityRating;
     private Boolean allowAnonLogging;
     private String contentVersion;
+    private ImageLinksDTO imageLinks;
     private String language;
     private String previewLink;
     private String infoLink;
     private String canonicalVolumeLink;
-    private ImageLinksDTO imageLinks;
 
     public String getTitle() {
         return title;
@@ -127,6 +127,14 @@ public class VolumenInfoDTO {
         this.contentVersion = contentVersion;
     }
 
+    public ImageLinksDTO getImageLinks() {
+        return imageLinks;
+    }
+
+    public void setImageLinks(ImageLinksDTO imageLinks) {
+        this.imageLinks = imageLinks;
+    }
+
     public String getLanguage() {
         return language;
     }
@@ -157,13 +165,5 @@ public class VolumenInfoDTO {
 
     public void setCanonicalVolumeLink(String canonicalVolumeLink) {
         this.canonicalVolumeLink = canonicalVolumeLink;
-    }
-
-    public ImageLinksDTO getImageLinks() {
-        return imageLinks;
-    }
-
-    public void setImageLinks(ImageLinksDTO imageLinks) {
-        this.imageLinks = imageLinks;
     }
 }

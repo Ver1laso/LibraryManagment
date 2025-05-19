@@ -1,10 +1,16 @@
 package dev.jlprisan.LibraryManagment.DTO;
 
-public class SaleInfoDTO {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class SaleInfo {
+
+    @JsonProperty("country")
     private String country;
+    @JsonProperty("seability")
     private String saleability;
+    @JsonProperty("isEbook")
     private Boolean isEbook;
+
 
     public String getCountry() {
         return country;

@@ -1,10 +1,9 @@
 package dev.jlprisan.LibraryManagment.Entities;
 
-import dev.jlprisan.LibraryManagment.DTO.ImageLinksDTO;
-import dev.jlprisan.LibraryManagment.DTO.IndustryIdentifiersDTO;
+
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Entity

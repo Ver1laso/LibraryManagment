@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin(origins = "http://localhost:5173")
 public class GoogleBookController {
 
     private final GoogleBookService googleBookService;
@@ -26,8 +27,8 @@ public class GoogleBookController {
 
     @GetMapping("search/title")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<GoogleBookResponseDTO> searchGoogleBookTitle(@RequestParam String title){
-        return ResponseEntity.ok(googleBookService.searchGoogleBooksTitle(title));
+    public ResponseEntity<GoogleBookResponseDTO> searchGoogleBookTitle(@RequestParam String title, @RequestParam(required=false) String langRestrict){
+        return ResponseEntity.ok(googleBookService.searchGoogleBooksTitle(title, langRestrict));
     }
 
     @GetMapping("search/author")

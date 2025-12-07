@@ -65,11 +65,11 @@ public class BookShelvesEntity {
         this.qr_code = qr_code;
     }
 
-    public Date getQr_code_generated_at() {
+    public LocalDateTime getQr_code_generated_at() {
         return qr_code_generated_at;
     }
 
-    public void setQr_code_generated_at(Date qr_code_generated_at) {
+    public void setQr_code_generated_at(LocalDateTime qr_code_generated_at) {
         this.qr_code_generated_at = qr_code_generated_at;
     }
 }

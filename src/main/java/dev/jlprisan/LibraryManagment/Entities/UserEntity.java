@@ -8,9 +8,12 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String password;
     private String name;
     private String surname1;
     private String surname2;
+
+    @Column(unique = true)
     private String email;
     private Long phoneNumber;
     private String Address;
@@ -21,6 +24,14 @@ public class UserEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

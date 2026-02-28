@@ -9,7 +9,7 @@ import java.util.Collections;
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public CustomUserDetailService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -23,7 +23,7 @@ public class CustomUserDetailService implements UserDetailsService {
         }
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getEmail())
-                .username(user.getPassword())
+                .password(user.getPassword())
                 .authorities(Collections.emptyList())
                 .build();
     }

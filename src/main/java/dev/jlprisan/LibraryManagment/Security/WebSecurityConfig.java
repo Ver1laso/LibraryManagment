@@ -52,7 +52,8 @@ public class WebSecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(request -> {
                     var corsConfiguration = new CorsConfiguration();
-                    corsConfiguration.setAllowedOrigins(java.util.List.of("http://localhost:8080"));
+//                    corsConfiguration.setAllowedOrigins(java.util.List.of("http://localhost:8080"));
+                    corsConfiguration.setAllowedOrigins(java.util.List.of("http://localhost:5173"));
                     corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
                     corsConfiguration.setAllowCredentials(true);
@@ -65,7 +66,7 @@ public class WebSecurityConfig {
                         sessionManagment.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-//                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/test/all").permitAll()
                                 .anyRequest().authenticated())
 //                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
